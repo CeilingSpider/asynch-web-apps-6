@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Display user repos</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>List user repositories!</h1>
 
-        <form id="js-form">
+        <form id="js-form" class="search-form">
             <label for="user-name">Username</label>
             <input type="text" name="user-name" id="js-user-name" required>
-
-            <!--
-            <label for="max-results">Maximum results to return</label>
-            <input type="number" name="max-results" id="js-max-results" value="10">
-            -->
-
             <input type="submit" value="Submit">
         </form>
 
