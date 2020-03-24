@@ -1,6 +1,6 @@
 'use strict';
 
-//function renders results, displays them in DOM
+//renders the results and diplays them in the DOM
 function displayResults(responseJson) {
     console.log('displayResults ran');
     //When data is ready - hides progress indicator
@@ -18,7 +18,7 @@ function displayResults(responseJson) {
         <ul class="results-list"></ul>
     `
     $('.js-results').append(userinfo)
-    //loop through results and make a list of repos, including link and description
+    //loop through results to make a list of repos w/ link and description
     for (let i = 0; i < responseJson.length; i++) {
         $('.js-results').append(`
         <div class="result-item"><li><h4>${responseJson[i].name}</h4>
@@ -28,7 +28,7 @@ function displayResults(responseJson) {
         `)
     }
     //removes hidden class to display results
-    $('.js-results').removeClass('hidden');
+    $('.js-results').removeClass('hidden')
 
 }
 
@@ -63,26 +63,35 @@ function displayError(error) {
     $('.loading').addClass('hidden');
     $('.js-results').removeClass('hidden')
 }
+//This function uses random to select the text of the Search Button
+function getSearchPhrase() {
+    return (['Search', 'Find','Look up','Go','Check'])[Math.floor(Math.random() * 5)];
+}
 
-
-
-
-
-
-//event listener for submit event
+//Event listener for submit event
 function watchForm() {
-        //listens for submit event
-    $('js-form').submit(event => {
-        //overrides default behavior
-      event.preventDefault();
-      console.log('watchForm ran');
-      const userName = $('#js-search-term').val();
-      console.log(username);
-      getRepos(userName);
-      //clears prior data from results section
-      $('.js-results').empty().addClass('hidden')
+    //Listens for submit event
+    $('#js-form').submit(event => {
+        //override default behavior
+        event.preventDefault();
+        console.log('watchForm ran');
+        //determine the text of the button
+        let searchPhrase = getSearchPhrase()
+        console.log(searchPhrase)
+        //change the text of the search button
+        $('#find-btn').html(searchPhrase)
+        //clears any prior data from results section
+        $('.js-results').empty().addClass('hidden')
+        //store username 
+        const username = $('.js-username').val();
+        console.log(username);
+        //This utilizes setTimeout function to test progress indicator animation
+        $('.loading').removeClass('hidden');
+        setTimeout(function () {
+            //pass username to API call 
+            getRepos(username);
+        }, 1000)
     });
-  }
+}
 
-  $(watchForm);
-
+$(watchForm);
