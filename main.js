@@ -28,7 +28,7 @@ function displayResults(responseJson) {
         `)
     }
     //removes hidden class to display results
-    $('.js-results').removeClass('hidden')
+    $('.js-results').removeClass('hidden');
 
 }
 
